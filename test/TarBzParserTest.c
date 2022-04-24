@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "BzReader.h"
-#include "TarParser.h"
+#include "TarBzParser/BzReader.h"
+#include "TarBzParser/TarParser.h"
 
 
 size_t readFromFile(void* f, char* buffer, size_t size) {

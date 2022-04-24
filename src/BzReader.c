@@ -1,5 +1,5 @@
 #include "bzlib.h"
-#include "BzReader.h"
+#include "TarBzParser/BzReader.h"
 
 int BzReader_init(BzReader_handle_t* handle, BufReader_t* reader) {
 

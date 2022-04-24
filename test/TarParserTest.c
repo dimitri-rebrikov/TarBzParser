@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "TarParser.h"
+#include "TarBzParser/TarParser.h"
 
 /** 
  * abstract reader function 

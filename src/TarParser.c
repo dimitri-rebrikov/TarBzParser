@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "TarParser.h"
+#include "TarBzParser/TarParser.h"
 
 /* Parse an octal number, ignoring leading and trailing nonsense. */
 static int

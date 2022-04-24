@@ -1,4 +1,4 @@
-#include "BufReader.h"
+#include "TarBzParser/BufReader.h"
 
 
 void BufReader_init(BufReader_t* reader, ParentReader_t parentReader, void* parentStream) {
