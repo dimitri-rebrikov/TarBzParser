@@ -1,0 +1,9 @@
+Name: TarParserTest1/
+Name: TarParserTest1/dir2/
+Name: TarParserTest1/dir2/file3
+Data: file3 sample content
+Name: TarParserTest1/dir1/
+Name: TarParserTest1/dir1/file2
+Data: file2 sample content
+Name: TarParserTest1/file1
+Data: file1 sample content
