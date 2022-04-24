@@ -1,9 +1,19 @@
-cmake_minimum_required(VERSION 3.0.0)
+cmake_minimum_required(VERSION 3.11...3.23)
 
 project(TarBzParser)
+
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+
+    include(CTest)
+
+endif()
 
 add_subdirectory(src)
 
 add_subdirectory(../bzip2 ./lib/bzip2)
 
-add_subdirectory(test)
+if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+   AND BUILD_TESTING)
+    add_subdirectory(test)
+endif()
+

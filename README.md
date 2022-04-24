@@ -11,5 +11,5 @@ With the library it is possible to pick out some data from huge tar, and tar.bz2
 * `mkdir build`
 * `cd build`
 * `cmake ..`
-* `make`
-* see *Test.c files for examples how to use the library
+* `make all test`
+* see test/*Test.c files for examples how to use the library

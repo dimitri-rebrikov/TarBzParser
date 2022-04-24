@@ -19,18 +19,26 @@ void printData(void* file, char* data, size_t size) {
     fprintf((FILE*)file, "Data: %.*s\n", size, data);
 }
 
-int main() {
+int main(int argc, char* argv[]) {
+    if(argc != 3) {
+        fprintf(stderr, "provide 2 parameters: <TarBzFilePathToReadFrom> <OutputFilePathToParseInto");
+        return -1;
+    }
+
+    char* tarFilePath = argv[1];
+    char* outFilePath = argv[2];
+
     char  buf[TAR_BLOCK_SIZE];
 
-    FILE* in  = fopen("../test/TarBzParserTest1.tar.bz2", "r" );
+    FILE* in  = fopen(tarFilePath, "r" );
     if (!in ) {
-         fprintf(stderr, "cannot open file for read");
+         fprintf(stderr, "cannot open file \"%s\" for read from ", tarFilePath);
          return -1;
     }
 
-    FILE* out = fopen("../test/TarBzParserTest1.txt.tmp", "w+" );
+    FILE* out = fopen(outFilePath, "w+" );
     if(!out) {
-        fprintf(stderr, "cannot open file to write");
+          fprintf(stderr, "Cannot open file \"%s\" to write to.", outFilePath);
         return -1;
     }
 

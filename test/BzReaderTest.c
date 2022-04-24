@@ -8,19 +8,27 @@ size_t readFromFile(void* f, char* buffer, size_t size) {
     return fread(buffer, sizeof(char), size, (FILE*)f);
 }
 
-int main() {
+int main(int argc, char* argv[]) {
+    if(argc != 3) {
+        fprintf(stderr, "provide 2 parameters: <BzFilePathToReadFrom> <OutputFilePathToExtractInto");
+        return -1;
+    }
+
+    char* bzFilePath = argv[1];
+    char* outFilePath = argv[2];
+
     bz_stream bStream;
     char  buf[BUF_READER_BUFFER_SIZE];
 
-    FILE* in  = fopen ("../test/BzReaderTest1.txt.bz2", "r" );
+    FILE* in  = fopen (bzFilePath, "r" );
     if (!in ) {
-         fprintf(stderr, "cannot open file for read");
+         fprintf(stderr, "Cannot open file \"%s\" to read from.", bzFilePath);
          return -1;
     }
 
-    FILE* out = fopen("../test/BzReaderTest1.txt.tmp", "w+" );
+    FILE* out = fopen(outFilePath, "w+" );
     if(!out) {
-        fprintf(stderr, "cannot open file to write");
+        fprintf(stderr, "Cannot open file \"%s\" to write to.", outFilePath);
         return -1;
     }
 
