@@ -54,7 +54,7 @@ verify_checksum(const char *p)
 	return (u == parseoct(p + 148, 8));
 }
 
-void TarParser_parse(Reader_t* reader, TarParser_callback_t* callback)
+int TarParser_parse(Reader_t* reader, TarParser_callback_t* callback)
 {
 	char buff[TAR_BLOCK_SIZE];
 	size_t bytes_read;
@@ -66,15 +66,15 @@ void TarParser_parse(Reader_t* reader, TarParser_callback_t* callback)
 			fprintf(stderr,
 			    "Short read: expected %d, got %d\n",
 			 TAR_BLOCK_SIZE, (int)bytes_read);
-			return;
+			return -1;
 		}
 		if (is_end_of_archive(buff)) {
 			printf("End of archve\n");
-			return;
+			return 0;
 		}
 		if (!verify_checksum(buff)) {
 			fprintf(stderr, "Checksum failure\n");
-			return;
+			return -1;
 		}
 		filesize = parseoct(buff + 124, 12);
 		switch (buff[156]) {
@@ -109,7 +109,7 @@ void TarParser_parse(Reader_t* reader, TarParser_callback_t* callback)
 				fprintf(stderr,
 				    "Short read Expected TAR_BLOCK_SIZE, got %d\n",
 				    (int)bytes_read);
-				return;
+				return -1;
 			}
 			if (filesize < TAR_BLOCK_SIZE)
 				bytes_read = filesize;

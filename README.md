@@ -1,7 +1,7 @@
 # TarBzParser
-C library to parse .tar.bz2 files in the resource restricted (f.e. embedded) environment.
+C library to parse .bz2, .tar and .tar.bz2 files in the resource restricted (f.e. embedded) environment.
 
-With the library it is possible to pick out some data from huge tar, and tar.bz2 files without the need to extract them completely.
+With the library it is possible to pick out some data from huge .bz2, .tar, and tar.bz2 files without the need to extract them completely.
 
 ## How to compile
 

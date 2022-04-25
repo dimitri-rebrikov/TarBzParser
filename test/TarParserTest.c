@@ -49,7 +49,10 @@ int main(int argc, char* argv[]) {
     callback.dataCallback = &printData;
     callback.context = out;
 
-    TarParser_parse(&reader, &callback);
+    if(TarParser_parse(&reader, &callback)!=0) {
+        fprintf(stderr, "error during TarParser_parse");
+        return -1;
+    }
 
     fclose(in);
     fclose(out);

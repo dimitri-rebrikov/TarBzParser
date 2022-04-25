@@ -19,5 +19,6 @@ typedef struct TarParser_callback {
 
 /**
  * Parses the TAR stream from reader and uses callback to notify the consumer about entries found.
+ * Returns 0 in case of success and -1 in case of failure
  */
-void TarParser_parse(Reader_t* reader, TarParser_callback_t* callback);
+int TarParser_parse(Reader_t* reader, TarParser_callback_t* callback);

@@ -1,14 +1,9 @@
 #include <stdio.h>
-#include "TarBzParser/BzReader.h"
-#include "TarBzParser/TarParser.h"
+#include "TarBzParser/TarBzParser.h"
 
 
 size_t readFromFile(void* f, char* buffer, size_t size) {
     return fread(buffer, sizeof(char), size, (FILE*)f);
-}
-
-size_t readFromBz(void* f, char* buffer, size_t size) {
-    return BzReader_read(f, buffer, size);
 }
 
 void printName(void* file, char* name) {
@@ -42,27 +37,20 @@ int main(int argc, char* argv[]) {
         return -1;
     }
 
-    BufReader_t fReader;
-    BufReader_init(&fReader, &readFromFile, in);
-
-    BzReader_handle_t bzHandle;
-
-    if(BzReader_init(&bzHandle, &fReader)!=0) {
-        fprintf(stderr, "error during bzReader_init\n");
-        return -1;
-    }
-
-    Reader_t bzReader;
-    bzReader.parentReader =  &readFromBz;
-    bzReader.parentStream = &bzHandle;
-
+    Reader_t fReader;
+    fReader.parentReader = &readFromFile;
+    fReader.parentStream = in;
+   
     TarParser_callback_t callback;
     callback.dirCallback = &printName;
     callback.fileCallback = &printName;
     callback.dataCallback = &printData;
     callback.context = out;
 
-    TarParser_parse(&bzReader, &callback);
+    if(TarBzParser_parse(&fReader, &callback)!=0) {
+        fprintf(stderr, "error during TarBzParser_parse\n");
+        return -1;
+    }
 
     fclose(in);
     fclose(out);

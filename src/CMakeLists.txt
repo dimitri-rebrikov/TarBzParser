@@ -5,6 +5,7 @@ add_library(TarBzParser STATIC
     BufReader.c
     BzReader.c
     TarParser.c
+    TarBzParser.c
 )
 
 target_include_directories(TarBzParser PUBLIC ../include)
